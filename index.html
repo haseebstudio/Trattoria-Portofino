@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trattoria Portofino Berlin | Authentic Italian Restaurant in Friedrichshain</title>
+  <meta name="description" content="Trattoria Portofino – Authentic Italian cuisine in the heart of Berlin Friedrichshain. Handmade pasta, stone-oven pizza, fresh fish and fine wines. Open daily 11:30–24:00." />
+  <meta name="keywords" content="italian restaurant berlin, trattoria portofino, friedrichshain restaurant, pizza berlin, pasta berlin, italian food berlin" />
+  <meta property="og:title" content="Trattoria Portofino | Authentic Italian Restaurant Berlin" />
+  <meta property="og:description" content="Handmade pasta, stone-oven pizza, and the finest Italian cuisine in Berlin Friedrichshain." />
+  <meta property="og:type" content="restaurant" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ──────────────────────────────────────────
+       CSS VARIABLES & RESET
+    ────────────────────────────────────────── */
+    :root {
+      --cream:    #f5efe6;
+      --parchment:#ede3d4;
+      --gold:     #c9973a;
+      --gold-lt:  #e2b96a;
+      --rust:     #8b3a2f;
+      --charcoal: #1e1a17;
+      --muted:    #5a5046;
+      --white:    #fff9f3;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', sans-serif;
+
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 4px;
+      --shadow: 0 12px 40px rgba(30,26,23,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ──────────────────────────────────────────
+       SCROLLBAR
+    ────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--parchment); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ──────────────────────────────────────────
+       NAV
+    ────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(30,26,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,151,58,0.25);
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(30,26,23,0.98);
+      height: 60px;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--gold-lt);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex; gap: 2.2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,239,230,0.75);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content:''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--gold); color: var(--charcoal)!important;
+      padding: 0.45rem 1.2rem; border-radius: var(--radius);
+      font-weight: 500; letter-spacing: 0.08em!important;
+      transition: background var(--transition)!important;
+    }
+    .nav-cta:hover { background: var(--gold-lt)!important; }
+    .nav-cta::after { display: none!important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none;
+    }
+    .hamburger span {
+      width: 24px; height: 2px; background: var(--gold-lt);
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(30,26,23,0.98);
+      padding: 1.5rem;
+      z-index: 999;
+      flex-direction: column; gap: 1rem;
+      border-bottom: 1px solid rgba(201,151,58,0.2);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--cream); font-size: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: 0.08em;
+    }
+
+    /* ──────────────────────────────────────────
+       HERO
+    ────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: var(--charcoal);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1600&q=80');
+      background-size: cover; background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    #home:hover .hero-bg { transform: scale(1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(30,26,23,0.72) 0%,
+        rgba(30,26,23,0.55) 50%,
+        rgba(30,26,23,0.8) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 2rem;
+      max-width: 800px;
+      animation: fadeUp 1.1s ease both;
+    }
+    .hero-label {
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: inline-flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-label::before, .hero-label::after {
+      content:''; width: 28px; height: 1px; background: var(--gold);
+    }
+    h1.hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.08;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .hero-tagline {
+      font-size: 1.05rem; color: rgba(245,239,230,0.8);
+      letter-spacing: 0.06em;
+      font-weight: 300; margin-bottom: 2.2rem;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.6rem; margin-bottom: 2.8rem;
+    }
+    .hero-badge {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold-lt); border: 1px solid rgba(201,151,58,0.45);
+      padding: 0.3rem 0.9rem; border-radius: 20px;
+    }
+    .hero-buttons {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 2rem; border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 0.8rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 500; cursor: pointer;
+      border: none; transition: all var(--transition);
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--charcoal);
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,151,58,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(245,239,230,0.5);
+      color: var(--white);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold); color: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+    .btn-whatsapp {
+      background: #25d366; color: #fff;
+    }
+    .btn-whatsapp:hover {
+      background: #1ebe5d; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    }
+    .hero-info {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+      z-index: 2;
+    }
+    .hero-info-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: rgba(245,239,230,0.7);
+      letter-spacing: 0.06em;
+    }
+    .hero-info-item svg { color: var(--gold); }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 1rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.3rem; z-index: 2;
+      animation: bounce 2s ease infinite;
+    }
+    .scroll-hint span { font-size: 0.65rem; color: rgba(245,239,230,0.4); letter-spacing: 0.15em; text-transform: uppercase; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ──────────────────────────────────────────
+       DIVIDER / ORNAMENT
+    ────────────────────────────────────────── */
+    .ornament {
+      text-align: center; padding: 1.5rem 0;
+      color: var(--gold); font-size: 1.4rem; letter-spacing: 0.3em;
+    }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before {
+      content:''; flex: 1; max-width: 48px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-style: italic; font-weight: 300;
+      line-height: 1.15; color: var(--charcoal);
+      margin-bottom: 1.2rem;
+    }
+    .section-desc {
+      color: var(--muted); font-size: 1rem; max-width: 540px;
+      font-weight: 300; line-height: 1.8;
+    }
+
+    /* ──────────────────────────────────────────
+       ABOUT
+    ────────────────────────────────────────── */
+    #about {
+      padding: 7rem 5%;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .about-img-main {
+      grid-column: 1 / -1;
+      border-radius: 3px; overflow: hidden;
+    }
+    .about-img-main img,
+    .about-img-sm img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .about-img-main { height: 280px; }
+    .about-img-sm   { height: 160px; border-radius: 3px; overflow: hidden; }
+    .about-img-main:hover img,
+    .about-img-sm:hover img { transform: scale(1.05); }
+
+    .about-text .section-label { justify-content: flex-start; }
+    .about-text .section-label::before { display: none; }
+    .about-text .section-label::after { content:''; flex: none; width: 48px; height: 1px; background: var(--gold); }
+
+    .about-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.5rem;
+    }
+    .stat { border-left: 2px solid var(--gold); padding-left: 1rem; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 2.2rem;
+      color: var(--charcoal); font-weight: 300; line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-top: 0.2rem;
+    }
+
+    /* ──────────────────────────────────────────
+       FEATURES / WHY US
+    ────────────────────────────────────────── */
+    .features {
+      padding: 5rem 5%;
+      background: var(--parchment);
+    }
+    .features-inner { max-width: 1160px; margin: 0 auto; }
+    .features-header { text-align: center; margin-bottom: 3.5rem; }
+    .features-header .section-label { justify-content: center; }
+    .features-header .section-label::before { max-width: 48px; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--white);
+      padding: 2.2rem 1.8rem;
+      border-radius: var(--radius);
+      border-bottom: 3px solid transparent;
+      transition: all var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-family: var(--font-display); font-size: 1.3rem;
+      font-style: italic; margin-bottom: 0.6rem;
+      color: var(--charcoal);
+    }
+    .feature-card p {
+      font-size: 0.88rem; color: var(--muted);
+      font-weight: 300; line-height: 1.7;
+    }
+
+    /* ──────────────────────────────────────────
+       MENU
+    ────────────────────────────────────────── */
+    #menu {
+      padding: 7rem 5%;
+      background: var(--charcoal);
+    }
+    .menu-inner { max-width: 1160px; margin: 0 auto; }
+    .menu-header { margin-bottom: 3rem; }
+    .menu-header .section-title { color: var(--white); }
+    .menu-header .section-desc { color: rgba(245,239,230,0.6); }
+    .menu-header .section-label { color: var(--gold); }
+
+    .menu-tabs {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1rem;
+    }
+    .menu-tab {
+      background: none; border: 1px solid rgba(201,151,58,0.3);
+      color: rgba(245,239,230,0.6);
+      padding: 0.5rem 1.3rem; border-radius: 20px;
+      font-family: var(--font-body); font-size: 0.78rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: all var(--transition);
+    }
+    .menu-tab:hover, .menu-tab.active {
+      background: var(--gold); color: var(--charcoal);
+      border-color: var(--gold);
+    }
+
+    .menu-section { display: none; }
+    .menu-section.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .menu-item {
+      background: rgba(30,26,23,0.85);
+      padding: 1.4rem 1.6rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 1rem;
+      transition: background var(--transition);
+    }
+    .menu-item:hover { background: rgba(201,151,58,0.08); }
+    .menu-item-info { flex: 1; }
+    .menu-item-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-style: italic;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .menu-item-desc {
+      font-size: 0.8rem; color: rgba(245,239,230,0.5);
+      font-weight: 300; line-height: 1.5;
+    }
+    .menu-item-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem; color: var(--gold);
+      white-space: nowrap; font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    .lunch-banner {
+      background: linear-gradient(135deg, var(--rust), #a0442f);
+      border-radius: var(--radius); padding: 2rem 2.5rem;
+      margin-top: 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .lunch-banner h3 {
+      font-family: var(--font-display); font-size: 1.7rem;
+      font-style: italic; color: var(--white);
+    }
+    .lunch-banner p { color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 300; }
+    .lunch-price {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--gold-lt); font-weight: 300;
+    }
+
+    /* ──────────────────────────────────────────
+       GALLERY
+    ────────────────────────────────────────── */
+    .gallery {
+      padding: 5rem 5%;
+      background: var(--parchment);
+    }
+    .gallery-inner { max-width: 1160px; margin: 0 auto; }
+    .gallery-header { text-align: center; margin-bottom: 3rem; }
+    .gallery-header .section-label { justify-content: center; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 0.8rem;
+    }
+    .gal-item {
+      overflow: hidden; border-radius: var(--radius);
+      cursor: pointer;
+    }
+    .gal-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .gal-item:hover img { transform: scale(1.08); }
+    .gal-item:nth-child(1) { grid-column: span 5; }
+    .gal-item:nth-child(2) { grid-column: span 3; }
+    .gal-item:nth-child(3) { grid-column: span 4; }
+    .gal-item:nth-child(4) { grid-column: span 4; }
+    .gal-item:nth-child(5) { grid-column: span 5; }
+    .gal-item:nth-child(6) { grid-column: span 3; }
+
+    /* ──────────────────────────────────────────
+       SERVICES
+    ────────────────────────────────────────── */
+    #services {
+      padding: 7rem 5%;
+      background: var(--white);
+    }
+    .services-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 5rem; align-items: start;
+    }
+    .services-text .section-label::before { display: none; }
+    .services-text .section-label::after { content:''; width: 48px; height: 1px; background: var(--gold); }
+    .services-list {
+      list-style: none; display: flex; flex-direction: column; gap: 1rem;
+      margin-top: 2rem;
+    }
+    .services-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem; border-radius: var(--radius);
+      border: 1px solid var(--parchment);
+      transition: all var(--transition);
+    }
+    .services-list li:hover {
+      border-color: var(--gold);
+      transform: translateX(6px);
+      box-shadow: 4px 0 0 var(--gold);
+    }
+    .srv-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .srv-info h4 {
+      font-family: var(--font-display); font-size: 1.15rem;
+      font-style: italic; margin-bottom: 0.25rem;
+    }
+    .srv-info p { font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+
+    .services-cta {
+      background: var(--charcoal); border-radius: var(--radius);
+      padding: 3rem; color: var(--white);
+    }
+    .services-cta h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      font-style: italic; margin-bottom: 1rem;
+    }
+    .services-cta p { color: rgba(245,239,230,0.7); font-weight: 300; margin-bottom: 2rem; }
+    .services-cta .btn-primary { width: 100%; justify-content: center; margin-bottom: 0.8rem; }
+    .services-cta .hours {
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem; padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: rgba(245,239,230,0.75);
+    }
+    .hours-row span:last-child { color: var(--gold); }
+
+    /* ──────────────────────────────────────────
+       TESTIMONIALS
+    ────────────────────────────────────────── */
+    .testimonials {
+      padding: 6rem 5%;
+      background: var(--charcoal);
+    }
+    .testimonials-inner { max-width: 1160px; margin: 0 auto; }
+    .test-header { text-align: center; margin-bottom: 3rem; }
+    .test-header .section-title { color: var(--white); }
+    .test-header .section-label { justify-content: center; color: var(--gold); }
+    .test-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .test-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,151,58,0.15);
+      border-radius: var(--radius); padding: 2rem;
+      transition: all var(--transition);
+    }
+    .test-card:hover {
+      border-color: rgba(201,151,58,0.4);
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.07);
+    }
+    .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; }
+    .test-text {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-style: italic; color: rgba(245,239,230,0.85);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .test-author { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ──────────────────────────────────────────
+       MAP + CONTACT
+    ────────────────────────────────────────── */
+    #contact {
+      padding: 7rem 5%;
+      background: var(--cream);
+    }
+    .contact-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 4rem; align-items: start;
+    }
+    .contact-text .section-label::before { display: none; }
+    .contact-text .section-label::after { content:''; width: 48px; height: 1px; background: var(--gold); }
+    .contact-details { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .contact-item-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--charcoal); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-item-info h4 {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.25rem;
+    }
+    .contact-item-info p, .contact-item-info a {
+      font-size: 0.95rem; color: var(--charcoal); font-weight: 300;
+    }
+    .contact-item-info a:hover { color: var(--gold); }
+
+    .contact-social {
+      margin-top: 2rem; display: flex; gap: 0.8rem;
+    }
+    .social-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: all var(--transition);
+      border: 1px solid var(--parchment);
+      color: var(--charcoal);
+    }
+    .social-btn:hover {
+      background: var(--charcoal); color: var(--white);
+      border-color: var(--charcoal); transform: translateY(-3px);
+    }
+    .social-btn.fb:hover  { background: #1877f2; border-color: #1877f2; }
+    .social-btn.ig:hover  { background: #e1306c; border-color: #e1306c; }
+    .social-btn.wa:hover  { background: #25d366; border-color: #25d366; }
+    .social-btn.em:hover  { background: var(--rust); border-color: var(--rust); }
+
+    .map-container {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 4px solid var(--white);
+    }
+    .map-container iframe { display: block; }
+
+    /* ──────────────────────────────────────────
+       FOOTER
+    ────────────────────────────────────────── */
+    footer {
+      background: #121009;
+      padding: 3.5rem 5% 2rem;
+      color: rgba(245,239,230,0.55);
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand h2 {
+      font-family: var(--font-display); font-size: 1.6rem;
+      font-style: italic; color: var(--gold-lt);
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem; line-height: 1.7; font-weight: 300;
+      color: rgba(245,239,230,0.5);
+    }
+    .footer-col h4 {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul a {
+      font-size: 0.85rem; color: rgba(245,239,230,0.5);
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.78rem; }
+    .footer-credit { color: var(--gold); font-size: 0.78rem; }
+
+    /* ──────────────────────────────────────────
+       FLOATING WHATSAPP
+    ────────────────────────────────────────── */
+    .float-wa {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 56px; height: 56px;
+      background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      z-index: 999; transition: all var(--transition);
+    }
+    .float-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.65);
+    }
+    .float-wa svg { color: white; }
+
+    /* ──────────────────────────────────────────
+       ANIMATIONS
+    ────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ──────────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-images { order: -1; }
+      .services-inner { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gal-item { grid-column: span 1!important; height: 180px; }
+    }
+    @media (max-width: 640px) {
+      .hero-info { gap: 1rem; }
+      .about-stats { flex-direction: column; gap: 1rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gal-item { height: 200px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .lunch-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───── NAV ───── -->
+<nav id="navbar">
+  <a href="#home" class="nav-brand">Trattoria Portofino</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:+493023910610" class="nav-cta">📞 Reserve</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home"     onclick="closeMenu()">Home</a>
+  <a href="#about"    onclick="closeMenu()">About Us</a>
+  <a href="#menu"     onclick="closeMenu()">Menu</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#contact"  onclick="closeMenu()">Contact</a>
+  <a href="tel:+493023910610">📞 +49 30 239 10 610</a>
+</div>
+
+<!-- ───── HERO ───── -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">Est. Berlin · Friedrichshain</div>
+    <h1 class="hero-title"><em>Trattoria<br>Portofino</em></h1>
+    <p class="hero-tagline">Where Italy meets Berlin — one plate at a time 🍝</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🍕 Stone-Oven Pizza</span>
+      <span class="hero-badge">🍝 Homemade Pasta</span>
+      <span class="hero-badge">🐟 Fresh Seafood</span>
+      <span class="hero-badge">🍷 Italian Wine Selection</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn btn-primary">View Menu</a>
+      <a href="#contact" class="btn btn-outline">Book a Table</a>
+      <a href="https://wa.me/493023910610" target="_blank" class="btn btn-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Gubener Str. 48, 10243 Berlin
+    </div>
+    <div class="hero-info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Open Daily 11:30 – 24:00
+    </div>
+    <div class="hero-info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/></svg>
+      +49 30 239 10 610
+    </div>
+  </div>
+</section>
+
+<!-- ───── ABOUT ───── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-images reveal">
+      <div class="about-img-main">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Trattoria Portofino dining room Berlin" loading="lazy" />
+      </div>
+      <div class="about-img-sm">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Authentic Italian pizza from stone oven" loading="lazy" />
+      </div>
+      <div class="about-img-sm">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=600&q=80" alt="Handmade pasta at Trattoria Portofino" loading="lazy" />
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">A little corner<br>of Italy in Berlin</h2>
+      <p class="section-desc">
+        Tucked away on Gubener Straße in the lively Friedrichshain neighbourhood, Trattoria Portofino has been welcoming guests with the warmth and simplicity of authentic Italian cooking. Every dish that leaves our kitchen carries a little piece of Italy with it.
+      </p>
+      <p class="section-desc" style="margin-top: 1rem;">
+        We make our pasta fresh every morning, bake our pizzas in a real stone oven, and source our fish from trusted suppliers — the same way it's been done in Italian trattorias for generations. Pair your meal with a glass from our handpicked Italian wine list and let the evening take its time.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years Serving Berlin</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Homemade Pasta Daily</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Days a Week Open</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FEATURES ───── -->
+<div class="features">
+  <div class="features-inner">
+    <div class="features-header reveal">
+      <div class="section-label">What We Do Best</div>
+      <h2 class="section-title">Cooked with passion,<br>served with heart</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🍕</div>
+        <h3>Stone-Oven Pizza</h3>
+        <p>Every pizza is baked in our traditional stone oven — crispy base, bubbling cheese, and toppings that actually taste like something.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🍝</div>
+        <h3>Handmade Pasta</h3>
+        <p>We roll and shape our pasta fresh each morning. Nothing from a packet — just flour, eggs, and a bit of Italian stubbornness.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🐟</div>
+        <h3>Fresh Fish & Seafood</h3>
+        <p>Our grilled salmon, scampi, and fish specials are sourced fresh — simply seasoned to let the quality speak for itself.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🍷</div>
+        <h3>Italian Wine List</h3>
+        <p>A carefully chosen selection of Italian wines, ready to complement whatever you're having — our team is happy to suggest a match.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── MENU ───── -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="menu-header reveal">
+      <div class="section-label">Our Menu</div>
+      <h2 class="section-title">Something for everyone</h2>
+      <p class="section-desc">Made fresh daily with quality ingredients. Prices include VAT.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="showMenuTab('antipasti')">Starters</button>
+      <button class="menu-tab" onclick="showMenuTab('pasta')">Pasta</button>
+      <button class="menu-tab" onclick="showMenuTab('pizza')">Pizza</button>
+      <button class="menu-tab" onclick="showMenuTab('carne')">Meat</button>
+      <button class="menu-tab" onclick="showMenuTab('pesce')">Fish</button>
+      <button class="menu-tab" onclick="showMenuTab('dolce')">Desserts</button>
+      <button class="menu-tab" onclick="showMenuTab('bambini')">Kids</button>
+    </div>
+
+    <!-- Starters -->
+    <div class="menu-section active" id="menu-antipasti">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Bruschetta al Pomodoro</div><div class="menu-item-desc">Toasted bread with tomato, onion, garlic and basil</div></div><div class="menu-item-price">€6.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Mozzarella Buffalo e Pomodoro</div><div class="menu-item-desc">Buffalo mozzarella with tomatoes and fresh basil</div></div><div class="menu-item-price">€12.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Carpaccio di Manzo</div><div class="menu-item-desc">Marinated beef fillet with lemon, olive oil and parmesan</div></div><div class="menu-item-price">€14.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Carpaccio di Salmone</div><div class="menu-item-desc">Salmon fillet with lemon, olive oil and pine nuts</div></div><div class="menu-item-price">€14.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Vitello Tonnato</div><div class="menu-item-desc">Thinly sliced veal in a creamy tuna sauce</div></div><div class="menu-item-price">€15.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Antipasto della Casa</div><div class="menu-item-desc">Mixed Italian starter plate with carpaccio, buffalo mozzarella and seasonal vegetables</div></div><div class="menu-item-price">€15.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Zuppa di Pomodoro</div><div class="menu-item-desc">Creamy tomato soup</div></div><div class="menu-item-price">€6.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Minestrone</div><div class="menu-item-desc">Classic Italian vegetable soup</div></div><div class="menu-item-price">€6.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Zuppa di Pesce</div><div class="menu-item-desc">Homemade fish soup</div></div><div class="menu-item-price">€9.50</div></div>
+      </div>
+    </div>
+
+    <!-- Pasta -->
+    <div class="menu-section" id="menu-pasta">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Spaghetti Pomodoro</div><div class="menu-item-desc">Spaghetti with tomato sauce and olive oil</div></div><div class="menu-item-price">€8.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Spaghetti Aglio e Olio</div><div class="menu-item-desc">Spaghetti with garlic and olive oil</div></div><div class="menu-item-price">€9.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Spaghetti Bolognese</div><div class="menu-item-desc">Spaghetti with minced meat and tomato sauce</div></div><div class="menu-item-price">€10.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Spaghetti Carbonara</div><div class="menu-item-desc">Spaghetti in a creamy sauce with bacon and egg</div></div><div class="menu-item-price">€10.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Penne Arrabiata</div><div class="menu-item-desc">Penne with garlic in a spicy tomato sauce</div></div><div class="menu-item-price">€10.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Penne Sorrentina</div><div class="menu-item-desc">Penne with tomatoes and mozzarella</div></div><div class="menu-item-price">€11.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Penne Vegetariane</div><div class="menu-item-desc">Penne in light tomato herb sauce with seasonal vegetables</div></div><div class="menu-item-price">€12.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tagliatelle con Pollo</div><div class="menu-item-desc">Ribbon pasta with chicken breast and mushrooms in a light tomato cream sauce</div></div><div class="menu-item-price">€12.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tagliatelle al Salmone</div><div class="menu-item-desc">Ribbon pasta with salmon and cherry tomatoes in a lobster herb cream sauce</div></div><div class="menu-item-price">€14.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Linguine con Scampi</div><div class="menu-item-desc">Linguine with king prawns and cherry tomatoes in white wine herb sauce</div></div><div class="menu-item-price">€16.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Lasagne</div><div class="menu-item-desc">Homemade lasagne with minced meat and mozzarella</div></div><div class="menu-item-price">€13.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Penne al Forno</div><div class="menu-item-desc">Oven-baked penne with meat sauce and melted cheese</div></div><div class="menu-item-price">€13.90</div></div>
+      </div>
+    </div>
+
+    <!-- Pizza -->
+    <div class="menu-section" id="menu-pizza">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Margherita</div><div class="menu-item-desc">Tomato, mozzarella, fresh basil</div></div><div class="menu-item-price">€8.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Salame</div><div class="menu-item-desc">Tomato, mozzarella, salami</div></div><div class="menu-item-price">€9.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Napoli</div><div class="menu-item-desc">Tomato, mozzarella, anchovies, capers, olives</div></div><div class="menu-item-price">€11.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Prosciutto e Funghi</div><div class="menu-item-desc">Tomato, mozzarella, ham and mushrooms</div></div><div class="menu-item-price">€11.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Vegetariana</div><div class="menu-item-desc">Tomato, mozzarella, seasonal vegetables</div></div><div class="menu-item-price">€12.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Spinaci e Gorgonzola</div><div class="menu-item-desc">Tomato, mozzarella, spinach, gorgonzola</div></div><div class="menu-item-price">€12.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Tonno e Cipolla</div><div class="menu-item-desc">Tomato, mozzarella, tuna, red onions</div></div><div class="menu-item-price">€12.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Diavolo</div><div class="menu-item-desc">Tomato, mozzarella, spicy salami, mushrooms, peppers and parmesan</div></div><div class="menu-item-price">€13.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Parma</div><div class="menu-item-desc">Tomato, mozzarella, prosciutto, rocket, parmesan flakes</div></div><div class="menu-item-price">€14.00</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Salmone</div><div class="menu-item-desc">Tomato, mozzarella, fresh salmon, rocket, cherry tomatoes</div></div><div class="menu-item-price">€14.00</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza con Scampi</div><div class="menu-item-desc">Tomato, mozzarella, king prawns, rocket, cherry tomatoes</div></div><div class="menu-item-price">€16.50</div></div>
+      </div>
+    </div>
+
+    <!-- Meat -->
+    <div class="menu-section" id="menu-carne">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pollo alla Griglia</div><div class="menu-item-desc">Grilled chicken breast fillet — served with seasonal vegetables and rosemary potatoes</div></div><div class="menu-item-price">€16.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pollo Funghi</div><div class="menu-item-desc">Grilled chicken breast with mushrooms — served with seasonal vegetables and rosemary potatoes</div></div><div class="menu-item-price">€16.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Bistecca alla Griglia</div><div class="menu-item-desc">Grilled rump steak — served with seasonal vegetables and rosemary potatoes</div></div><div class="menu-item-price">€24.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Bistecca Funghi</div><div class="menu-item-desc">Grilled rump steak with mushrooms and cream sauce — served with seasonal vegetables</div></div><div class="menu-item-price">€24.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Bistecca al Pepe Verde</div><div class="menu-item-desc">Grilled rump steak in a green peppercorn cream sauce — served with seasonal vegetables</div></div><div class="menu-item-price">€24.90</div></div>
+      </div>
+    </div>
+
+    <!-- Fish -->
+    <div class="menu-section" id="menu-pesce">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Salmone alla Griglia</div><div class="menu-item-desc">Grilled salmon steak — served with seasonal vegetables and boiled potatoes</div></div><div class="menu-item-price">€24.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Salmone Vino Bianco</div><div class="menu-item-desc">Salmon in a white wine herb sauce — served with seasonal vegetables and boiled potatoes</div></div><div class="menu-item-price">€25.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Scampi alla Griglia</div><div class="menu-item-desc">Grilled king prawns with extra virgin olive oil</div></div><div class="menu-item-price">€27.50</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Scampi al Vino Bianco</div><div class="menu-item-desc">King prawns in a white wine and herb sauce</div></div><div class="menu-item-price">€27.90</div></div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-section" id="menu-dolce">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tiramisu della Casa</div><div class="menu-item-desc">Our own homemade tiramisu — the real deal</div></div><div class="menu-item-price">€6.20</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tartufo</div><div class="menu-item-desc">Italian ice cream speciality — light or dark chocolate</div></div><div class="menu-item-price">€5.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Cassata</div><div class="menu-item-desc">Italian ice cream with candied fruits</div></div><div class="menu-item-price">€5.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Gemischtes Eis</div><div class="menu-item-desc">Vanilla, strawberry and chocolate ice cream — with or without whipped cream</div></div><div class="menu-item-price">€4.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Parfait della Casa</div><div class="menu-item-desc">House semifreddo parfait</div></div><div class="menu-item-price">€6.20</div></div>
+      </div>
+    </div>
+
+    <!-- Kids -->
+    <div class="menu-section" id="menu-bambini">
+      <div class="menu-grid">
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Pizza Bambino</div><div class="menu-item-desc">Small pizza — Margherita, Salami or Prosciutto</div></div><div class="menu-item-price">€6.90</div></div>
+        <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Spaghetti Bambino</div><div class="menu-item-desc">Pomodoro (tomato sauce) or Bolognese (meat sauce)</div></div><div class="menu-item-price">€6.90</div></div>
+      </div>
+    </div>
+
+    <!-- Lunch Deal -->
+    <div class="lunch-banner reveal">
+      <div>
+        <h3>Lunch Special — Mon to Fri</h3>
+        <p>Any pasta, salad or pizza until 15:00 for just €8.50 — or go for the full lunch menu (drink + salad + main + espresso) for €12.50. Available Monday to Friday only.</p>
+      </div>
+      <div class="lunch-price">from €8.50</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── GALLERY ───── -->
+<div class="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header reveal">
+      <div class="section-label">A Taste of Portofino</div>
+      <h2 class="section-title">Our kitchen, our tables,<br>our guests</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Restaurant interior" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Stone oven pizza" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=600&q=80" alt="Fresh pasta" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91798d7f51?w=700&q=80" alt="Seafood dish" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Italian dining" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="Italian wine selection" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── SERVICES ───── -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-text reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">More than<br>just a meal</h2>
+      <p class="section-desc">Whether you're planning a quiet dinner, a birthday celebration, or need catering for your event — we're here to help make it memorable.</p>
+      <ul class="services-list">
+        <li>
+          <div class="srv-icon">🎉</div>
+          <div class="srv-info">
+            <h4>Private Events & Celebrations</h4>
+            <p>Birthdays, anniversaries, company events — we can arrange the space and menu to suit your occasion. Just get in touch.</p>
+          </div>
+        </li>
+        <li>
+          <div class="srv-icon">🍽️</div>
+          <div class="srv-info">
+            <h4>Catering Service</h4>
+            <p>Bring the taste of Portofino to your office, home or venue. We offer catering options for groups big and small.</p>
+          </div>
+        </li>
+        <li>
+          <div class="srv-icon">🥗</div>
+          <div class="srv-info">
+            <h4>Daily Lunch Menu</h4>
+            <p>Monday to Friday, we offer a great-value lunch deal starting from €8.50 — perfect for a quick, proper midday meal.</p>
+          </div>
+        </li>
+        <li>
+          <div class="srv-icon">👨‍👩‍👧</div>
+          <div class="srv-info">
+            <h4>Family & Kids Friendly</h4>
+            <p>We love having families. Our kids menu keeps the little ones happy while the grown-ups enjoy their evening.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="services-cta reveal">
+      <h3>Ready to join us?</h3>
+      <p>Same-day reservations are possible by phone after 12:00. For earlier the same day or future bookings, drop us an email and we'll get back to you promptly.</p>
+      <a href="tel:+493023910610" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:0.8rem;">
+        📞 Call to Reserve: +49 30 239 10 610
+      </a>
+      <a href="mailto:info@portofino-trattoria.de" class="btn btn-outline" style="width:100%;justify-content:center;">
+        ✉️ Email Us a Booking
+      </a>
+      <div class="hours">
+        <div class="hours-row"><span>Monday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Tuesday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Wednesday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Thursday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Friday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>11:30 – 24:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>11:30 – 24:00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── TESTIMONIALS ───── -->
+<div class="testimonials">
+  <div class="testimonials-inner">
+    <div class="test-header reveal">
+      <div class="section-label">What Our Guests Say</div>
+      <h2 class="section-title">Real guests, real words</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"The pasta is genuinely made fresh — you can taste the difference. Came here on a rainy Tuesday and left in a completely different mood. The salmon pasta was outstanding."</p>
+        <div class="test-author">— Maria K., Berlin</div>
+      </div>
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"We used to live around the corner and Portofino was basically our second dining room. Moved away two years ago and still make the trip back whenever we're in Berlin. Says it all."</p>
+        <div class="test-author">— Thomas & Sandra</div>
+      </div>
+      <div class="test-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Booked a table for my birthday and they really looked after us. Great atmosphere, lovely staff, and the Tiramisu della Casa is honestly one of the best I've had outside of Italy."</p>
+        <div class="test-author">— Ayşe B., Friedrichshain</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── CONTACT ───── -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Come see us<br>in Friedrichshain</h2>
+      <p class="section-desc">We're just steps from Comeniusplatz, easy to reach by U-Bahn and tram. No need for a special occasion — just come hungry.</p>
+
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-info">
+            <h4>Address</h4>
+            <p>Gubener Straße 48, 10243 Berlin<br>(Near Comeniusplatz, Friedrichshain)</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-info">
+            <h4>Phone</h4>
+            <a href="tel:+493023910610">+49 30 239 10 610</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div class="contact-item-info">
+            <h4>Email</h4>
+            <a href="mailto:info@portofino-trattoria.de">info@portofino-trattoria.de</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-info">
+            <h4>Opening Hours</h4>
+            <p>Monday – Sunday: 11:30 – 24:00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-social">
+        <a href="https://www.facebook.com/trattoria.portofino.berlin/" target="_blank" class="social-btn fb" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="social-btn ig" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://wa.me/493023910610" target="_blank" class="social-btn wa" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+        <a href="mailto:info@portofino-trattoria.de" class="social-btn em" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://www.tripadvisor.de/Restaurant_Review-g187323-d8685515-Reviews-Trattoria_Portofino-Berlin.html" target="_blank" class="social-btn" aria-label="TripAdvisor" style="font-size:1rem;">🦉</a>
+      </div>
+    </div>
+
+    <!-- Google Maps Embed -->
+    <div class="map-container reveal">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.3456!2d13.4479!3d52.5124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84f1a88fda2d7%3A0x4ff24c1d6d8a1a2!2sTrattoria%20Portofino!5e0!3m2!1sen!2sde!4v1680000000000!5m2!1sen!2sde"
+        width="100%" height="420"
+        style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Trattoria Portofino location map">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2><em>Trattoria Portofino</em></h2>
+      <p>Authentic Italian cuisine in the heart of Berlin Friedrichshain. Homemade pasta, stone-oven pizza, fresh fish — and always a warm welcome. Open every day from 11:30 to midnight.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+493023910610">+49 30 239 10 610</a></li>
+        <li><a href="mailto:info@portofino-trattoria.de">info@portofino-trattoria.de</a></li>
+        <li><a href="https://maps.app.goo.gl/CTUYqpwJitoKfcsv8" target="_blank">Gubener Str. 48, 10243 Berlin</a></li>
+        <li><a href="http://www.portofino-trattoria.de/" target="_blank">www.portofino-trattoria.de</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Trattoria Portofino · All rights reserved</p>
+    <p class="footer-credit">Designed &amp; Developed by Haseeb Mazhar</p>
+  </div>
+</footer>
+
+<!-- ───── FLOATING WHATSAPP ───── -->
+<a href="https://wa.me/493023910610" target="_blank" class="float-wa" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ───── JAVASCRIPT ───── -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // Menu tabs
+  function showMenuTab(tab) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('menu-' + tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
